@@ -1,0 +1,282 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <script type="text/javascript">
+        var user = '{{ request.user }}';
+
+        function getToken(name) {
+            var cookieValue = null;
+            if (document.cookie && document.cookie !== '') {
+                var cookies = document.cookie.split(';');
+                for (let i = 0; i < cookies.length; i++) {
+                    var cookie = cookies[i].trim();
+                    // Does this cookie string begin with the name we want?
+                    if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                        break;
+                    }
+                }
+            }
+            return cookieValue;
+        }
+        var csrftoken = getToken('csrftoken');
+
+    </script>
+
+    <title>Coffee Shop</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.js"
+        integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="{% static 'styles/style.css' %}">
+    <link rel="shortcut icon" href="{% static 'images/logo.png' %}" type="image/x-icon">
+</head>
+
+<body>
+
+    {% include 'main/nav.html' %}
+
+    <section class="home" id="home">
+
+        <div class="content">
+            <h3>قهوه تازه در صبح</h3>
+            <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است</p>
+            <a href="#" class="btn">اکنون مال خود را دریافت کنید</a>
+        </div>
+
+    </section>
+    <section class="about" id="about">
+
+        <h1 class="heading"> <span>about</span> us </h1>
+
+        <div class="row">
+
+            <div class="image">
+                <img src="{% static 'images/about-img.jpeg' %}" alt="">
+            </div>
+
+            <div class="content">
+                <h3>چگونه قهوه خاص درست کنم؟</h3>
+                <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است چاپگرها و
+                    متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است</p>
+                <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است</p>
+                <a href="#" class="btn">اطلاعات بیشتر</a>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <section class="products" id="products">
+
+        <h1 class="heading"> our <span>products</span> </h1>
+
+        <div class="box-container">
+
+            {% for product in products %}
+            <div class="box">
+                <div class="icons">
+                    <a href="#" data-product="{{ product.id }}" data-action="add"
+                        class="fas fa-shopping-cart add-btn update-cart"></a>
+                    <a href="#" class="fas fa-heart"></a>
+                    <a href="#" class="fas fa-eye"></a>
+                </div>
+                <div class="image">
+                    <img src="{{ product.image.url }}" alt="">
+                </div>
+                <div class="content">
+                    <h3>{{ product.title }}</h3>
+                    <div class="stars">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                    </div>
+                    <div class="price">{{ product.price }} T</div>
+                </div>
+            </div>
+            {% endfor %}
+
+        </div>
+
+    </section>
+
+    <section class="review" id="review">
+
+        <h1 class="heading"> customer's <span>review</span> </h1>
+
+        <div class="box-container">
+
+            <div class="box">
+                <img src="{% static 'images/quote-img.png' %}" alt="" class="quote">
+                <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است
+                    چاپگرها و
+                    متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز
+                </p>
+                <img src="{% static 'images/pic-1.png' %}" class="user" alt="">
+                <h3>علیرضا ابراهیمی</h3>
+                <div class="stars">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star-half-alt"></i>
+                </div>
+            </div>
+
+            <div class="box">
+                <img src="{% static 'images/quote-img.png' %}" alt="" class="quote">
+                <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است
+                    چاپگرها و
+                    متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز
+                </p>
+                <img src="{% static 'images/pic-2.png' %}" class="user" alt="">
+                <h3>مینا احمدی</h3>
+                <div class="stars">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star-half-alt"></i>
+                </div>
+            </div>
+
+            <div class="box">
+                <img src="{% static 'images/quote-img.png' %}" alt="" class="quote">
+                <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است
+                    چاپگرها و
+                    متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز
+                </p>
+                <img src="{% static 'images/pic-3.png' %}" class="user" alt="">
+                <h3>علی مرادی</h3>
+                <div class="stars">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star-half-alt"></i>
+                </div>
+            </div>
+
+        </div>
+
+    </section>
+
+    <section class="contact" id="contact">
+
+        <h1 class="heading"> <span>contact</span> us </h1>
+
+        <div class="row">
+
+            <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3234.9948107609557!2d51.62236331561469!3d35.824603029702175!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3f8e1937f99fe025%3A0x9d24fe1217b476e1!2sTehran%20Province%2C%20Lavasan%2C%205th%20Laleh%2C%20Iran!5e0!3m2!1sen!2sde!4v1643642377908!5m2!1sen!2sde"
+                width="800" height="600" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+
+            <form action="">
+                <h3>با ما در تماس باشید</h3>
+                <div class="inputBox">
+                    <span class="fas fa-user"></span>
+                    <input type="text" placeholder="Name">
+                </div>
+                <div class="inputBox">
+                    <span class="fas fa-envelope"></span>
+                    <input type="email" placeholder="Email">
+                </div>
+                <div class="inputBox">
+                    <span class="fas fa-phone"></span>
+                    <input type="number" placeholder="Number">
+                </div>
+                <input type="submit" value="اکنون تماس بگیرید" class="btn">
+            </form>
+
+        </div>
+
+    </section>
+    <section class="blogs" id="blogs">
+
+        <h1 class="heading"> our <span>blogs</span> </h1>
+
+        <div class="box-container">
+
+            <div class="box">
+                <div class="image">
+                    <img src="{% static 'images/blog-1.jpeg' %}" alt="">
+                </div>
+                <div class="content">
+                    <a href="#" class="title">قهوه خوش طعم و با طراوت</a>
+                    <span>by admin of Esoulve coffee / 2022</span>
+                    <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است
+                    </p>
+                    <a href="#" class="btn">اطلاعات بیشتر</a>
+                </div>
+            </div>
+
+            <div class="box">
+                <div class="image">
+                    <img src="{% static 'images/blog-2.jpeg' %}" alt="">
+                </div>
+                <div class="content">
+                    <a href="#" class="title">قهوه خوش طعم و با طراوت</a>
+                    <span>by admin of Esoulve coffee / 2022</span>
+                    <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است
+                    </p>
+                    <a href="#" class="btn">اطلاعات بیشتر</a>
+                </div>
+            </div>
+
+            <div class="box">
+                <div class="image">
+                    <img src="{% static 'images/blog-3.jpeg' %}" alt="">
+                </div>
+                <div class="content">
+                    <a href="#" class="title">قهوه خوش طعم و با طراوت</a>
+                    <span>by admin of Esoulve coffee / 2022</span>
+                    <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است
+                    </p>
+                    <a href="#" class="btn">اطلاعات بیشتر</a>
+                </div>
+            </div>
+
+        </div>
+
+    </section>
+
+    {% include 'main/footer.html' %}
+
+    <!-- scroll top -->
+    <div id="to-top" title="back to top"><i class="fas fa-chevron-up"></i></div>
+    <!-- scroll top -->
+    <!-- js scroll top -->
+    <script>
+        $(function () {
+            $(window).scroll(function () {
+                if ($(this).scrollTop() - 200 > 0) {
+                    $('#to-top').stop().slideDown('fast'); // show the button
+                } else {
+                    $('#to-top').stop().slideUp('fast'); // hide the button
+                }
+            });
+        });
+        $(function () {
+
+            $("#to-top").on("click", function () {
+                $("html, body").animate({
+                    scrollTop: 0
+                }, 50);
+            });
+        });
+    </script>
+    <!-- js scroll top -->
+
+    <script type="text/javascript" src="{% static 'js/cart.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/script.js' %}"></script>
+</body>
+
+</html>

@@ -1,0 +1,26 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'styles/login.css' %}">
+    <title>login</title>
+</head>
+
+<body>
+    <div class="container">
+        <form method="post">
+            {% csrf_token %}
+            <img src="{% static 'images/cofeelogin.gif' %}" alt="">
+            {{ login_form.as_p }}
+            <input class="btn" type="submit" value="Login">
+            <p class="message">not registered? <a href="{% url 'register' %}">creat an account</a></p>
+            <a class="go" href="{% url 'index' %}">Go To Home Page</a>
+        </form>
+    </div>
+</body>
+
+</html>

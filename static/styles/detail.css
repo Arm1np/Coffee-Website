@@ -1,0 +1,42 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  background: url(../images/turkbg.jpg) center;
+  height: 100vmax;
+}
+a {
+  text-decoration: none;
+}
+.carousel-inner {
+  border-radius: 15px;
+}
+.carousel-inner img {
+  height: 390px;
+}
+.title h2 {
+  color: #d2b48c;
+  margin-top: 95px;
+}
+h4 {
+  color: #e2ceb6;
+}
+.text-detail {
+  direction: rtl;
+  text-align: justify;
+  line-height: 2;
+}
+html::-webkit-scrollbar {
+  width: 0.5rem;
+}
+
+html::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+html::-webkit-scrollbar-thumb {
+  background: #111;
+  border-radius: 5rem;
+}
